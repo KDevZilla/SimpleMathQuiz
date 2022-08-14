@@ -17,7 +17,7 @@ namespace SimpleMathQuiz
                 return getrandom.Next(min, max);
             }
         }
-        public static List<int> GetListofUniqueRandom(int min, int max, int NumberofRandom)
+        public static List<int> GetListofUniqueRandom(int min, int max, int NumberofRandom, int NumberNotAllow)
         {
            // List<int> listResult = new List<int>();
             int CountLoop = 0;
@@ -27,6 +27,10 @@ namespace SimpleMathQuiz
             while(hashUnique.Count < NumberofRandom)
             {
                 int RandomNumber = Utility.GetRandomNumber(min, max);
+                if(RandomNumber == NumberNotAllow)
+                {
+                    continue;
+                }
                 if(!hashUnique.Contains(RandomNumber))
                 {
                     hashUnique.Add(RandomNumber);

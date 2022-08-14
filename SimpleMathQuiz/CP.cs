@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace SimpleMathQuiz
 {
-    public static class ConsoleHelper
-    {
+    //CP in this case stand for ConsoleHelper
+    public static class CP
+    { 
         public static  String Read()
         {
             return Console.ReadLine();
@@ -19,6 +20,21 @@ namespace SimpleMathQuiz
         public static void WriteLine(String value)
         {
             Console.WriteLine(value);
+        }
+        public static void WriteLineWithDelay(String value)
+        {
+            WriteLineWithDelay(value, 5);
+        }
+       public static void WriteLineWithDelay(String value,int numberofMilisecondTodelay)
+        {
+            int i;
+            for (i = 0; i < value.Length; i++)
+            {
+                Console.Write(value.Substring(i, 1));
+                System.Threading.Thread.Sleep(numberofMilisecondTodelay);
+               
+            }
+            Console.WriteLine();
         }
         public static string Enquiery(String question, bool CanAnswerBeblank)
         {
@@ -38,40 +54,42 @@ namespace SimpleMathQuiz
                
                 if (!IsAnswerValid)
                 {
-                    Write("Your answer is not valid, plesae try again");
+                    WriteLine("Your answer is not valid, plesae try again");
                 }
             
             }
             return answer;
         }
-        public static string EnquieryWithChoice(String question, params string[] arrValidvalue)
+        public static string EnquieryWithChoice(String question,int numberofMilisecondTodelay, params string[] arrValidvalue)
         {
             Boolean IsAnswerValid = false;
             String answer = "";
             while (!IsAnswerValid)
             {
-
-                Write(question);
+                if (numberofMilisecondTodelay > 0)
+                {
+                    WriteLineWithDelay(question, numberofMilisecondTodelay);
+                }
+                else
+                {
+                    Write(question);
+                }
                 answer = Read();
                 IsAnswerValid = arrValidvalue.Contains(answer);
                 if (!IsAnswerValid)
                 {
-                    Write("Your answer is not valid, plesae try again");
+                    WriteLine("Your answer is not valid, plesae try again");
                 }
-                /*
-                foreach (string validvalud in arrValidvalue)
-                {
-                    if (answer.Equals(validvalud))
-                    {
-                        IsAnswerValid = true;
-                        break;
-                    }
-                
-                }
-                */
+
 
             }
             return answer;
+        }
+        public static string EnquieryWithChoice(String question, params string[] arrValidvalue)
+        {
+            return EnquieryWithChoice(question, 0, arrValidvalue);
+
+           
 
         }
     }
