@@ -15,7 +15,7 @@ namespace SimpleMathQuiz
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.White;
             Boolean IsUserStillWouldliketoplay = true;
-            Game game = new Game(20);
+            Game game = new Game(50);
             while (IsUserStillWouldliketoplay)
             {
                 
